@@ -16,12 +16,12 @@ var gulp = require('gulp'),
     minifyCSS = require('gulp-minify-css');
 
 // array of vendor JS to include in the project
-var vendorList = ['bower_components/jquery/dist/jquery.min.js', 'bower_components/fancybox/source/jquery.fancybox.pack.js'];
+var vendorList = ['bower_components/jquery/dist/jquery.min.js'];
 
 // Server config
 var server = express();
 server.use(livereload({
-    port: 35729
+    port: 35728
 }));
 server.use(express.static('./build'));
 
@@ -40,11 +40,11 @@ gulp.task('less', function () {
 // Process Images
 gulp.task('images', function () {
     return gulp.src('dev/img/**/*')
-        .pipe(imagemin({
-            progressive: false,
+      /*  .pipe(imagemin({
+            progressive: true,
             svgoPlugins: [{removeViewBox: false}],
             use: [pngcrush()]
-        }))
+        }))*/
         .pipe(gulp.dest('build/img'))
         .pipe(refresh(lrserver));
 });
@@ -101,13 +101,13 @@ gulp.task('build', function () {
 });
 
 gulp.task('serve', function () {
-    server.listen(3000);
-    lrserver.listen(35729);
+    server.listen(3001);
+    lrserver.listen(35728);
 });
 
 gulp.task('watch', function () {
     gulp.watch('dev/less/**/*.less', ['less']);
-    gulp.watch('dev/views/**/*.html', ['html']);
+    gulp.watch('dev/views/*.html', ['html']);
     gulp.watch('dev/img/**/*', ['images']);
     gulp.watch('dev/js/**/*', ['jslint', 'compress']);
 });

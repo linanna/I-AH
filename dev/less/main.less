@@ -1,0 +1,163 @@
+// import bootstrap components as needed
+@import url('../../bower_components/bootstrap/less/variables.less');
+// overwrite with our custom variables
+@import url('variables.less');
+@import url('../../bower_components/bootstrap/less/mixins.less');
+@import url('../../bower_components/bootstrap/less/normalize.less');
+@import url('../../bower_components/bootstrap/less/grid.less');
+@import url('../../bower_components/bootstrap/less/utilities.less');
+
+
+//Components
+//@import url('components/flags.less');
+
+h1,h2 {
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+.col-sm-1 {
+  box-sizing: border-box;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* ==========================================================================
+                                basics
+========================================================================== */
+
+html {
+  background: url("../img/bg_image.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow-y: scroll;
+}
+/* center horizontal and vertical the container */
+.container {
+  margin-top: 5%;
+}
+
+.box, .inner-box {
+//  background-color: @brand-secondary;
+    height: 260px;
+//  opacity: 0.9;
+//  cursor: pointer;
+
+  &.black {
+    background-color: @brand-primary;
+    cursor: default;
+  }
+  &.red {
+    background-color: @brand-main;
+    cursor: default;
+    color: @text-color-secondary;
+  }
+
+  .center {
+    position: relative;
+    text-align: center;
+    top: 50%;
+
+    img.logo {
+      margin-top: -15%;
+    }
+  }
+
+  h2.center {
+    top: 47%;
+  }
+}
+/* entire container, keeps perspective */
+.flip-box {
+  perspective: 1000;
+
+  /* flip the pane when hovered */
+  &.flip .flipper {
+    transform: rotateY(180deg);// scale(2,2.1) translate(0, 80px);
+    /* scale(x,y) translate(x, y)*/
+  }
+  .flipper {
+    height: 100%;
+    /* flip speed goes here */
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+
+    .front, .back {
+      height: 100%;
+      width: 100%;
+
+      /* hide back of pane during swap */
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* front pane, placed above back */
+    .front {
+      z-index: 2;
+      background-color: @brand-secondary;
+      opacity: 0.9;
+      cursor: pointer;
+    }
+    /* back, initially hidden pane */
+    .back {
+      transform: rotateY(180deg);
+      background-color: @brand-secondary;
+      height: 536px;
+      width: 800px;
+      left: -272px;
+      z-index: 3;
+
+      .col-sm-2 {
+        padding: 0;
+
+        .inner-box {
+          padding: 35px 8px 8px 50px;
+
+          h2 {
+            font-weight: 400;
+          }
+        }
+      }
+      .exit {
+        background-color: @brand-main;
+        color: white;
+        float: right;
+        margin-right: 8px;
+        margin-top: 8px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.team .back {
+    left: 0;
+  }
+  &.angebote .back {
+    left: -543px;
+    top: -276px;
+  }
+  &.contact .back {
+    top: -276px;
+  }
+}
+.slider-box {
+ .exit {
+   position: absolute;
+   right: 0;
+   z-index: 200;
+ }
+}
+.slick-active img {
+  margin: 8px;
+}
